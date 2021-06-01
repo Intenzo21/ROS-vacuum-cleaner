@@ -1,0 +1,22 @@
+#charge_speed is amount of charge gained per second
+#const_drain is amount of charge lost per second
+#drive_drain is amount of charge lost per m driven
+#turn_drain is amount of charge lost per radian
+#vacuum_drain is amount of charge lost per second while vacuum is on
+#chargers is a list of chargers, each consisting of a list of [x y radius] positions
+
+charge_speed: 1
+const_drain: 0.01
+drive_drain: 0.2
+turn_drain: 0.1
+vacuum_drain: 0.06  # Adjusted since did not implement driving to charging points
+
+chargers: [ [ -2.0, 2.0, 0.5 ], [ 2.0, 4.6, 0.5 ], [ 13.0, -4.0, 0.5 ] ]
+
+#vacuum_radius is the radius of the vacuum cleaner (in meters), identifying the area which will be vacuumed centred around the robot.
+
+vacuum_radius: 0.1
+
+#instructions is a list of [x y] lists identifying points in rooms where vacuuming must take place
+
+instructions: [ [ 0, -4.0 ], [ 10,-4.0 ], [ 2.0, 4.0 ], [ 4, 4 ], [-12.0, 0 ], [ 2, 0 ], [ 12.3, 0 ], [ 12.0, 4 ] ]

@@ -1,0 +1,132 @@
+window
+(
+  size [ 654 576 ] # in pixels
+  scale 50.000   # pixels per meter
+  center [ 0.000  0.000 ]
+  rotate [ 0.000  0.000 ]
+  			
+  show_data 1              # 1=on 0=off
+)
+
+
+define block model
+(
+  size [0.100 0.100 0.010]
+  gui_nose 0
+)
+define long_block model
+(
+  size [1.000 0.100 0.010]
+  gui_nose 0
+)
+
+define large_block model
+(
+  size [1.000 0.500 0.500]
+  gui_nose 0
+)
+
+define cam camera
+(
+  resolution [ 640 480 ]
+  range [ 0.1 10 ] 
+  fov [ 70 40 ]
+  size [ 0.050 0.050 0.100 ]
+)
+
+define topurg ranger
+(
+	sensor( 			
+    range [ 0.0  5.0 ]
+    fov 270.25
+   samples 1081
+     noise [ 0.001 0.0 0.0 ]
+  )
+
+  # generic model properties
+  color "black"
+  size [ 0.050 0.050 0.100 ]
+)
+
+define erratic position
+(
+  size [0.200 0.200 0.250]
+  origin [-0.050 0.000 0.000 0.000]
+  gui_nose 1
+  drive "diff"
+  topurg(pose [ 0.050 0.000 0.200 0.000 ])
+  cam(pose [ 0.050 0.000 0.000 0.000 ])
+  localization "odom"
+  localization_origin [ 0 0 0 0 ] #REMOVE FOR ROBOT TO NOT KNOW WHERE IT STARTS
+  odom_error [ 0.001 0.001 0.001 0.001 0.001 0.001 ]
+)
+
+define floorplan model
+(
+  # sombre, sensible, artistic
+  color "gray30"
+
+  # most maps will need a bounding box
+  boundary 1
+
+  gui_nose 0
+  gui_grid 0
+  gui_move 0
+
+  gui_outline 0
+  gripper_return 0
+  fiducial_return 0
+  ranger_return 1.000
+)
+
+# set the resolution of the underlying raytrace model in meters
+resolution 0.01
+
+interval_sim 100  # simulation timestep in milliseconds
+
+
+window
+( 
+  size [ 1024 768 ] 
+
+  rotate [ 0.000 0.0 ]
+  scale 28.806 
+)
+
+# load an environment bitmap
+floorplan
+( 
+  name "willow"
+  bitmap "floorplan2.png"
+  size [26.940 9.940 1.500]
+  pose [ 0.000 0.000 0.000 0.000 ]
+)
+
+# throw in a robot
+erratic( pose [ 2.000 0.000 0.000 0.000 ] name "era" color "blue")
+block( pose [ 7.330 0.600 0.000 0.000 ] color "red")
+block( pose [ 7.210 0.600 0.000 0.000 ] color "green")
+block( pose [ 7.330 -0.600 0.000 0.000 ] color "red")
+block( pose [ 7.210 -0.600 0.000 0.000 ] color "green")
+large_block( pose [9.580 -2.200 0.000 0.000 ] color "yellow")
+
+#bottom long x:3.02
+#short x left: 2.57
+#top long x 3.12
+#bottom y: 1.06
+#middle bottom y: 1.98
+#middle top y: 2.08
+#top y: 2.9
+
+##bottom blocks
+long_block( pose [ 3.020 1.060 0.000 0.000 ] color "green")
+long_block( pose [ 3.020 1.980 0.000 0.000 ] color "green")
+block( pose [ 3.570 1.060 0.000 0.000 ] color "red")
+block( pose [ 3.570 1.980 0.000 0.000 ] color "red")
+
+##top blocks
+long_block( pose [ 3.120 2.080 0.000 0.000 ] color "green")
+long_block( pose [ 3.120 2.900 0.000 0.000 ] color "green")
+block( pose [ 2.570 2.080 0.000 0.000 ] color "red")
+block( pose [ 2.570 2.900 0.000 0.000 ] color "red")
+

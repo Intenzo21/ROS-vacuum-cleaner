@@ -1,0 +1,6 @@
+image: ./floorplan2.png
+resolution: 0.02
+occupied_thresh: 0.3
+free_thresh: 0.1
+negate: 0
+origin: [-13.47, -4.97 , 0.0]
